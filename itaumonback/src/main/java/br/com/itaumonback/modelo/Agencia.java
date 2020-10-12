@@ -1,0 +1,61 @@
+package br.com.itaumonback.modelo;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_agencia")
+public class Agencia {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;	
+	
+	@Column(name="nr_agencia")
+	private int numero;
+	
+	@Column(name="nm_agencia", length=50)
+	private String nome;
+
+	
+	public Agencia() {
+		super();
+	}
+
+	public Agencia(int id, int numero, String nome) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+}
