@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatorio</title>
     <script src="js/comum.js"></script>
+    <script src="js/relatorio.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 
-<body onload="carregarusuario()">
+<body onload="carregarusuario(); carregarlistaagencia();">
 
     <div class="container">
         <br><br>
@@ -26,7 +27,7 @@
             <div class="col-6">
                 <div class="row">
                     <div class="col-4">
-                        <label class="input-group-text"> 
+                        <label class="input-group-text">
                             <h4><b>Nome</b></h4>
                         </label>
                     </div>
@@ -72,7 +73,41 @@
         <br><br>
 
         <div class="container">
- 
+            <div class="row">
+                <div class="col-2">
+                    <label class="input-group-text">
+                        <b>Agencia</b>
+                    </label>
+                </div>
+                <div class="col-8">
+                    <select class="custom-select" id="cmbagencia">
+
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button onclick="filtrar()" type="button" class="btn btn-primary btn-block">Filtrar</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th colspan="3">Feriados</th>
+                            </tr>
+                            <tr>
+                                <th scope="col-4">Inicio/Fim</th>
+                                <th scope="col-3">Feriado</th>
+                                <th scope="col-5">Agencia</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabferiados">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
 

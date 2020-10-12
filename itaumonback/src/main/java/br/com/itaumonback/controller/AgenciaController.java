@@ -37,7 +37,7 @@ public class AgenciaController {
 	public ResponseEntity<List<Agencia>> listarAgencias()
 	{
 		List<Agencia> lista = (List<Agencia>)dao.findAll();
-
+		
 		if (lista.size() == 0) {
 			return ResponseEntity.status(404).build();
 		}

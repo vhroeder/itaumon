@@ -73,7 +73,6 @@ function logar() {
     .catch(err => {
         window.alert("Erro no procedimento de Login !");
     })
-
 }
 function is_empty(e) {
     switch (e) {
