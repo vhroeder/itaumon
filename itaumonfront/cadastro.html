@@ -15,120 +15,107 @@
 <body onload="carregarusuario(); carregarlistaagencia();">
 
     <div class="container">
-        <br><br>
+        <div class="row mt-1">
+            <div class="col-12 p-2 text-center bg-info text-white font-weight-bold">
+                <h4>Sistema de Feriados</h4>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-3 p-0" id="fotousuario"></div>
+            <div class="col-6 border border-primary">
+                <div class="row">
+                    <div class="pl-4 pt-4 col-2 col-form-label font-weight-bold">
+                        <label>Nome</label>
+                    </div>
+                    <div class="pl-5 pt-4 col-10 col-form-label font-weight-bold">
+                        <label id="txtnomeusuario"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="pl-4 pt-3 col-2 col-form-label font-weight-bold">
+                        <label>RACF</label>
+                    </div>
+                    <div class="pl-5 pt-3 col-10 col-form-label font-weight-bold">
+                        <label id="txtracfusuario"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="pl-4 pt-3 col-2 col-form-label font-weight-bold">
+                        <label>Funcional</label>
+                    </div>
+                    <div class="pl-5 pt-3 col-10 col-form-label font-weight-bold">
+                        <label id="txtfuncionalusuario"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="pl-4 pt-3 col-2 col-form-label font-weight-bold">
+                        <label>Email</label>
+                    </div>
+                    <div class="pl-5 pt-3 col-10 col-form-label font-weight-bold">
+                        <label id="txtemailusuario"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 align-items-center">
+                <button onclick="logout()" type="button"
+                    class="btn btn-primary btn-lg font-weight-bold mx-0 w-100 h-40">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mt-1">
+            <div class="col-12 p-2 text-center bg-info text-white font-weight-bold">
+                <h5>Cadastro de Feriados</h5>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="input-group-text">
+                    <b>Agencia</b>
+                </label>
+            </div>
+            <div class="col-8">
+                <select class="custom-select" id="cmbagencia">
+
+                </select>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-4">
+                <label class="input-group-text">
+                    <b>Feriado</b>
+                </label>
+            </div>
+            <div class="col-8">
+                <input type="text" id="txtnomeferiado" class="form-control">
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="input-group-text">
+                    <b>Inicio</b>
+                </label>
+            </div>
+            <div class="col-4">
+                <label class="input-group-text">
+                    <b>Fim</b>
+                </label>
+            </div>
+            <div class="col-4"></div>
+        </div>
         <div class="row">
-            <div class="col-12">
-                <h2>Sistema Feriados</h2>
+            <div class="col-4">
+                <input type="text" id="txtdatainicioferiado" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="col-4">
+                <input type="text" id="txtdatafimferiado" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="col-4">
+                <button onclick="cadastrarferiado()" type="button"
+                    class="btn btn-primary btn-block font-weight-bold">Cadastrar</button>
             </div>
         </div>
-        <br><br>
-        <div class="row">
-            <div class="col-3" id="fotousuario"></div>
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-4">
-                        <label class="input-group-text">
-                            <h4><b>Nome</b></h4>
-                        </label>
-                    </div>
-                    <div class="col-8">
-                        <label class="input-group-text" id="txtnomeusuario"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <label class="input-group-text">
-                            <h4><b>RACF</b></h4>
-                        </label>
-                    </div>
-                    <div class="col-8">
-                        <label class="input-group-text" id="txtracfusuario"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <label class="input-group-text">
-                            <h4><b>Funcional</b></h4>
-                        </label>
-                    </div>
-                    <div class="col-8">
-                        <label class="input-group-text" id="txtfuncionalusuario"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <label class="input-group-text">
-                            <h4><b>Email</b></h4>
-                        </label>
-                    </div>
-                    <div class="col-8">
-                        <label class="input-group-text" id="txtemailusuario"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <button onclick="logout()" type="button" class="btn btn-primary btn-lg btn-block">Logout</button>
-            </div>
-        </div>
-        <br><br>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-4">
-                    <label class="input-group-text">
-                        <b>Agencia</b>
-                    </label>
-                </div>
-                <div class="col-8">
-                    <select class="custom-select" id="cmbagencia">
-
-                    </select>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-4">
-                    <label class="input-group-text">
-                        <b>Feriado</b>
-                    </label>
-                </div>
-                <div class="col-8">
-                    <input type="text" id="txtnomeferiado" class="form-control">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-4">
-                    <label class="input-group-text">
-                        <b>Inicio</b>
-                    </label>
-                </div>
-                <div class="col-4"></div>
-                <div class="col-4">
-                    <label class="input-group-text">
-                        <b>Fim</b>
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <input type="text" id="txtdatainicioferiado" class="form-control" placeholder="DD/MM/YYYY">
-                </div>
-                <div class="col-4"></div>
-                <div class="col-4">
-                    <input type="text" id="txtdatafimferiado" class="form-control"  placeholder="DD/MM/YYYY">
-                </div>
-            </div>
-            <br><br>
-            <div class="row">
-                <div class="col-9"></div>
-                <div class="col-3">
-                    <button onclick="cadastrarferiado()" type="button"
-                        class="btn btn-primary btn-lg btn-block">Cadastrar</button>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
