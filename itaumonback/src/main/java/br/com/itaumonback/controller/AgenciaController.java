@@ -12,14 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.itaumonback.dao.AgenciaDAO;
+import br.com.itaumonback.dao.FeriadoDAO;
 import br.com.itaumonback.modelo.Agencia;
+import br.com.itaumonback.modelo.Feriado;
 
 @RestController
 @CrossOrigin("*")
 public class AgenciaController {
- 
+
 	@Autowired
 	private AgenciaDAO dao;
+	
+	@Autowired
+	private FeriadoDAO ferdao;
 	
 	@GetMapping("/agencia/consultar/{codigo}")
 	public ResponseEntity<Agencia> consultarAgencia(@PathVariable int codigo)
@@ -48,9 +53,19 @@ public class AgenciaController {
 	@PostMapping("/agencia/incluir")
 	public ResponseEntity<Agencia> incluirAgencia(@RequestBody Agencia agencia)
 	{
-		try  
+		try 
 		{
 			dao.save(agencia);
+			/*List<Feriado> feriadosNacionais = (List<Feriado>)ferdao.findByNacional(true);
+			for (Feriado feriadoNacional : feriadosNacionais) {
+				Feriado feriadoLocal = new Feriado();
+				feriadoLocal.setNome(feriadoNacional.getNome());
+				feriadoLocal.setNacional(false);
+				feriadoLocal.setDataInicio(feriadoNacional.getDataInicio());
+				feriadoLocal.setDataFim(feriadoNacional.getDataFim());
+				feriadoLocal.setAgencia(agencia);
+				ferdao.save(feriadoLocal);
+			}*/
 			return ResponseEntity.ok(agencia);
 		}
 		catch (Exception ex)
@@ -58,6 +73,7 @@ public class AgenciaController {
 			ex.printStackTrace();
 			return ResponseEntity.status(403).build();
 		}
+		
 	}
 	
 	@PostMapping("/agencia/alterar")
@@ -72,7 +88,6 @@ public class AgenciaController {
 
 		try  
 		{
-		
 			if (agencia.getNome() !=null && !agencia.getNome().isEmpty())
 				cadastro.setNome(agencia.getNome());
 
@@ -99,5 +114,32 @@ public class AgenciaController {
 
 		return ResponseEntity.ok(retorno);
 	}
-
+	
+	@PostMapping("/agencia/alterartodos")
+	public ResponseEntity<List<Agencia>> incluirTodos(@RequestBody Feriado feriado)
+	{
+		try  
+		{
+			ferdao.save(feriado);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		List<Agencia> lista = (List<Agencia>) dao.findAll();
+		for (Agencia ag : lista ){
+			List<Feriado> feriados = ag.getFeriados();
+			feriados.add(feriado);
+			ag.setFeriados(feriados);
+			try  
+			{
+				dao.save(ag);
+			}
+			catch (Exception ex)
+			{
+				ex.printStackTrace();
+			}
+		}
+		return ResponseEntity.ok(lista);
+	}
 }

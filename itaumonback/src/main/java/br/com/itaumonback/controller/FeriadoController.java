@@ -32,6 +32,18 @@ public class FeriadoController {
 		return ResponseEntity.ok(lista);
 	}
 	
+	@GetMapping("/feriado/listarnacionais")
+	public ResponseEntity<List<Feriado>> listarFeriadosNacionais()
+	{
+		List<Feriado> lista = (List<Feriado>)dao.findByNacional(true);
+		
+		if (lista.size() == 0) {
+			return ResponseEntity.status(404).build();
+		}
+
+		return ResponseEntity.ok(lista);
+	}
+	
 	@PostMapping("/feriado/incluir")
 	public ResponseEntity<Feriado> incluirFeriado(@RequestBody Feriado feriado)
 	{

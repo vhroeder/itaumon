@@ -27,6 +27,9 @@ public class Feriado {
 	@Column(name="nm_feriado", length=50)
 	private String nome;
 	
+	@Column(name="nacional")
+	private boolean nacional;
+
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="dd/MM/yyyy", shape=JsonFormat.Shape.STRING)
 	@Column(name="dt_inicio")
@@ -40,16 +43,16 @@ public class Feriado {
 	@ManyToOne
 	@JsonIgnoreProperties("feriados")
 	private Agencia agencia;
-
 	
 	public Feriado() {
 		super();
 	}
 
-	public Feriado(int id, String nome, Date dataInicio, Date dataFim, Agencia agencia) {
+	public Feriado(int id, String nome, boolean nacional, Date dataInicio, Date dataFim, Agencia agencia) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.nacional = nacional;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.agencia = agencia;
@@ -94,6 +97,12 @@ public class Feriado {
 	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
 	}
-
 	
+	public boolean isNacional() {
+		return nacional;
+	}
+
+	public void setNacional(boolean nacional) {
+		this.nacional = nacional;
+	}
 }
