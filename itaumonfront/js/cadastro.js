@@ -7,11 +7,11 @@ function carregarlistaagencia() {
 }
 
 function preenchercombo(lista) {
-    var combo = "<option selected>Selecione a Agencia</option>";
+    var combo = "<option selected>Selecione a Agencia</option>" + "<option value='0'>Todas as Agências</option>";
 
     for (contador = 0; contador < lista.length; contador++) {
         combo +=
-            "<option value='" + lista[contador].id + "'>" + lista[contador].numero + " - " + lista[contador].nome + "</option>";
+            "<option value='" + lista[contador].id + "'>" + lista[contador].id + " - " + lista[contador].nome + "</option>";
     }
 
     document.getElementById("cmbagencia").innerHTML = combo;
@@ -63,13 +63,25 @@ function cadastrarferiado() {
         return;
     }
 
-    var carta = {
-        "nome": feriado,
-        "dataInicio": datainicio,
-        "dataFim": datafim,
-        "agencia": {
-            "id": idagencia
-        }
+    var carta = {};
+
+   
+
+    if (idagencia <= 0){ //se está selecionado todas as agencias, considera-se feriado nacional
+        carta = {
+            "nome": feriado,
+            "dataInicio": datainicio,
+            "dataFim": datafim,
+            "nacional": true
+        };
+    }else{ //se tem agência selecionada, cadastra apenas para aquela agência
+        carta = {
+            "nome": feriado,
+            "dataInicio": datainicio,
+            "dataFim": datafim,
+            "nacional": false,
+            "agencia": {"id": idagencia}
+        };
     }
 
     var envelope = {
@@ -78,7 +90,7 @@ function cadastrarferiado() {
         headers: {
             "Content-type": "application/json"
         }
-    }
+    };
 
     fetch("http://localhost:8080/feriado/incluir", envelope)
         .then(res => res.json())
@@ -88,7 +100,7 @@ function cadastrarferiado() {
         })
         .catch(err => {
             window.alert("Erro ao gravar o feriado !");
-        })
+    })
 }
 function is_empty(e) {
     switch (e) {
@@ -120,4 +132,45 @@ function validadata(data) {
         }
     }
     return false                           // se inválida :(
+}
+//funcções para cadastro de agências
+function cadastraragencia(){
+    var idagencia = document.getElementById("txtidagencia").value;
+    var nomeagencia = document.getElementById("txtnomeagencia").value.trim().toUpperCase();
+    
+    if (isNaN(idagencia) || idagencia <= 0){
+        document.getElementById("txtidagencia").focus();
+        window.alert("Preencher um número válido de agência !!");
+        return;
+    }
+
+    if (is_empty(nomeagencia)){
+        document.getElementById("txtnomeagencia").focus();
+        window.alert("Preencher um nome válido de agência !!");
+        return;
+    }
+
+    var carta = {
+        "id": idagencia,
+        "nome": nomeagencia,
+    }
+
+    var envelope = {
+        method: "POST",
+        body: JSON.stringify(carta),
+        headers: {
+            "Content-type": "application/json"
+        }
+    }
+
+    fetch("http://localhost:8080/agencia/incluir", envelope)
+        .then(res => res.json())
+        .then(res => {
+            window.location = "cadastroagencia.html";
+            window.alert("Agência cadastrada com sucesso !!");
+        })
+        .catch(err => {
+            window.alert("Erro ao cadastrar agência !");
+        })
+
 }

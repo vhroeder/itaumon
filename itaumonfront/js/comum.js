@@ -8,11 +8,11 @@ function carregarusuario() {
 
     var usuariojson = JSON.parse(usuariologado);
 
-    document.getElementById("fotousuario").innerHTML = "<img width='75%' src='images/" + usuariojson.foto + "'>";
-    document.getElementById("txtnomeusuario").innerHTML = "" + usuariojson.nome + "";
-    document.getElementById("txtracfusuario").innerHTML = "" + usuariojson.racf + "";
-    document.getElementById("txtfuncionalusuario").innerHTML = "" + usuariojson.funcional + "";
-    document.getElementById("txtemailusuario").innerHTML = "" + usuariojson.email + "";
+    document.getElementById("fotousuario").innerHTML = "<img width='80%' src='images/" + usuariojson.foto + "'>";
+    document.getElementById("txtnomeusuario").innerHTML = "<h4>" + usuariojson.nome + "</h4>";
+    document.getElementById("txtracfusuario").innerHTML = "<h4>" + usuariojson.racf + "</h4>";
+    document.getElementById("txtfuncionalusuario").innerHTML = "<h4>" + usuariojson.funcional + "</h4>";
+    document.getElementById("txtemailusuario").innerHTML = "<h4>" + usuariojson.email + "</h4>";
 
 
 }

@@ -10,59 +10,53 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
-<body onload="carregarindex()">
+<body onload="carregarindex()"> 
 
-    <div class="container">
-        <br><br><br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 pt-3 shadow border border-dark rounded-lg text-dark bg-transparent">
-                <form>
-                    <legend class="p-2 mb-1 text-center bg-info text-white font-weight-bolder">Login</legend>
-                    <br>
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-8">
-                            <div class="form-group">
-                                <label class="col-form-label col-form-label-lg font-weight-bold">Usuario</label>
-                                <input type="text" id="txtusuario" class="text-uppercase form-control form-control-lg">
-                                <small id="hlpusuario" class="form-text text-muted user-select-all">Informe sua Funcional ou
-                                    RACF</small>
-                            </div>
-                        </div>
-                        <div class="col-2"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-8">
-                            <div class="form-group">
-                                <label class="col-form-label col-form-label-lg font-weight-bold">Senha</label>
-                                <input type="password" id="txtsenha" class="form-control form-control-lg">
-                                <small id="hlpsenha" class="form-text text-muted user-select-all">Sua senha deve conter no minimo 8
-                                    caracteres</small>
-                            </div>
-                        </div>
-                        <div class="col-2"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <br>
-                                <input onclick="logar()" type="button" id="btnlogin"
-                                    class="btn btn-primary btn-lg btn-block font-weight-bold" value="Entrar">
-                            </div>
-                        </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <br>
-                </form>
+    <div class="container-fluid"> 
+        <br><br><br><br>
+        <form>
+            <div class="row" align="center">
+                <div class="col-4"></div>
+                <div class="col-4"> 
+                    <h3>Login</h3>
+                    <br><br>
+                </div>
+                <div class="col-4"></div>
             </div>
-            <div class="col-3"></div>
-        </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="text" id="txtusuario" class="form-control">
+                        <small id="hlpusuario" class="form-text text-muted">Informe sua Funcional ou RACF</small>
+                    </div>    
+                </div>
+                <div class="col-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" id="txtsenha" class="form-control">
+                        <small id="hlpsenha" class="form-text text-muted">Sua senha deve conter no minimo 8 caracteres</small>
+                    </div>    
+                </div>
+                <div class="col-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <br>
+                        <input onclick="logar()" type="button" id="btnlogin" class="btn btn-primary btn-lg btn-block" value="Login">
+                    </div>    
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </form>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

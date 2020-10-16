@@ -7,12 +7,11 @@ function carregarlistaagencia() {
 }
 
 function preenchercombo(lista) {
-    var combo = "<option selected>Selecione o Filtro</option>";
-    combo += "<option value='0'>TODOS OS FERIADOS</option>";
-
+    var combo = "<option selected>Selecione a Agência</option>";
+    
     for (contador = 0; contador < lista.length; contador++) {
         combo +=
-            "<option value='" + lista[contador].id + "'>" + lista[contador].numero + " - " + lista[contador].nome + "</option>";
+            "<option value='" + lista[contador].id + "'>" + lista[contador].id + " - " + lista[contador].nome + "</option>";
     }
 
     document.getElementById("cmbagencia").innerHTML = combo;
@@ -27,61 +26,52 @@ function filtrar() {
         return;
     }
 
-    if (filtro != 0) {
-        fetch("http://localhost:8080/agencia/consultar/" + filtro)
+    fetch("http://localhost:8080/agencia/consultar/" + filtro)
             .then(res => res.json())
-            .then(res => preenchertabela1(res))
+            .then(res => preenchertabelalocais(res))
             .catch(err => {
                 window.alert("Erro ao recuperar os Feriados !!");
-            });    
-    }
-    else {
-        fetch("http://localhost:8080/feriado/listar")
-            .then(res => res.json())
-            .then(res => preenchertabela2(res))
-            .catch(err => {
-                window.alert("Erro ao recuperar os Feriados !!");
-            });    
-    }
-
+            }); 
 }
-function preenchertabela1(lista) {
+function preenchertabelalocais(lista) {
 
     if (lista.feriados.length == 0)
     {
-        window.alert("Nao existem Feriados para o filtro selecionado !!");
+        window.alert("Essa agência não tem feriados locais !!");
     }
 
     var tabela = "";
-
     for (contador = 0; contador < lista.feriados.length; contador++) {
         tabela +=
             "<tr>" +
                   "<td>" + lista.feriados[contador].dataInicio + " - " + lista.feriados[contador].dataFim + 
             "</td> <td>" + lista.feriados[contador].nome + 
-            "</td> <td>" + lista.nome + 
+            "</td> <td>" + lista.id + " - " + lista.nome + 
             "</td> </tr>";
     }
 
-    document.getElementById("tabferiados").innerHTML = tabela;
+
+    fetch("http://localhost:8080/feriado/listarnacionais")
+            .then(res => res.json())
+            .then(res => preenchertabelanacionais(res, tabela))
+            .catch(err => {
+                window.alert("Erro ao recuperar os Feriados !!");
+            });
 }
-function preenchertabela2(lista) {
+function preenchertabelanacionais(lista, tabelalocal) {
 
     if (lista.length == 0)
     {
-        window.alert("Nao existem Feriados para o filtro selecionado !!");
+        window.alert("Essa agência não tem feriados nacionais !!");
     }
 
-    var tabela = "";
-
     for (contador = 0; contador < lista.length; contador++) {
-        tabela +=
+        tabelalocal +=
             "<tr>" +
                   "<td>" + lista[contador].dataInicio + " - " + lista[contador].dataFim + 
             "</td> <td>" + lista[contador].nome + 
-            "</td> <td>" + lista[contador].agencia.nome + 
-            "</td> </tr>";
+            "</td> <td> Todas as Agências </td> </tr>";
     }
 
-    document.getElementById("tabferiados").innerHTML = tabela;
+    document.getElementById("tabferiados").innerHTML = tabelalocal;
 }
